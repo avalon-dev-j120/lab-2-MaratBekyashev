@@ -5,6 +5,10 @@ import ru.avalon.java.j20.labs.Task;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 
 /**
  * Задание №3
@@ -19,11 +23,11 @@ public class Task3 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
+        File input = new File("../assets/countries.txt");
         File output = new File("countries_buffered_mode_output.txt");
         Collection<String> lines = read(input);
         write(output, lines);
-
+        
         /*
          * TODO(Студент): Выполнить задание №3
          *
@@ -52,7 +56,12 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+      Collection<String> result = new LinkedList<>();
+      BufferedReader reader = new BufferedReader(new FileReader(file));
+      String line;
+      while((line = reader.readLine()) != null)
+        result.add(line);
+      return result;
     }
 
     /**
@@ -66,6 +75,10 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+      PrintWriter writer = new PrintWriter(file);
+      for (String str: collection)
+        writer.print(str+"\r\n");
+      writer.flush();
+      writer.close();
     }
 }

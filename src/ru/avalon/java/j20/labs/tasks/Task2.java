@@ -4,6 +4,9 @@ import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileReader;
+import java.io.Writer;
+import java.io.FileWriter;
 
 /**
  * Задание №2
@@ -18,7 +21,7 @@ public class Task2 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
+        File input = new File("../assets/countries.txt");
         File output = new File("countries_text_mode_output.txt");
         String text = read(input);
         write(output, text);
@@ -54,7 +57,23 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+      FileReader reader = null;
+      StringBuilder builder = null;
+      
+        try {
+          reader = new FileReader(file);
+          builder = new StringBuilder();
+          int i;
+          char[] buffer = new char[2048];
+          while ((i = reader.read(buffer,0, 2048)) >= 0)
+            builder.append(buffer, 0, i);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        finally{
+          reader.close();
+        }
+       return builder.toString();
     }
 
     /**
@@ -65,7 +84,14 @@ public class Task2 implements Task {
      * @param text текст
      * @throws IOException в случае ошибок ввода-вывода.
      */
-    private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private void write(File file, String text)  {
+       try (Writer writer = new FileWriter(file)) {
+       writer.write(text);
+       writer.flush();
+       }
+       catch(IOException e ){
+         System.out.println(e.getMessage());
+
+       }
     }
 }

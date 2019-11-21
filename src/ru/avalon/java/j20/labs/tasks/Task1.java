@@ -4,6 +4,10 @@ import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Задание №1
@@ -18,10 +22,12 @@ public class Task1 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_binary_mode_output.txt");
+        
+        File input = new File("../assets/countries.txt");
+        File outputF = new File("countries_binary_mode_output.txt");
+
         String text = read(input);
-        write(output, text);
+        write(outputF, text);
 
         /*
          * TODO(Студент): Выполнить задание №1
@@ -54,7 +60,23 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        byte[] buffer = new byte[2048];
+        FileInputStream stream = null;
+        ByteArrayOutputStream outStr = null;
+        try {
+          stream = new FileInputStream(file);
+          outStr = new ByteArrayOutputStream();
+          int i;
+          while((i = stream.read(buffer, 0, 2048)) >= 0)
+            outStr.write(buffer, 0, i);
+        }
+        catch(IOException ex){
+          System.out.println("Some IO.Exception"); 
+        }
+        finally {
+          stream.close();
+        }
+        return outStr.toString();
     }
 
     /**
@@ -66,6 +88,18 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+      OutputStream stream = null;
+         
+      try {
+        stream = new FileOutputStream(file);
+        stream.write(text.getBytes());
+      } 
+      catch (IOException e) {
+          // null;
+      }
+      finally{
+        stream.flush();
+        stream.close();
+      }
     }
 }
