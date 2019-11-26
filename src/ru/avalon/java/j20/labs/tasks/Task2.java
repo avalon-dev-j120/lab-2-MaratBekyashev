@@ -21,7 +21,7 @@ public class Task2 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("../assets/countries.txt");
+        File input = new File("assets/countries.txt");
         File output = new File("countries_text_mode_output.txt");
         String text = read(input);
         write(output, text);
