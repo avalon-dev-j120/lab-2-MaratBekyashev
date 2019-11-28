@@ -31,9 +31,7 @@ public class Task5 implements Task {
          * 4. С использованием отладчика сравнить полученные ресурсы и
          *    проверить корректность работы программы.
          */
-        // ResourceBundle bundle = ResourceBundle.getBundle("resources.strings/titles");
         ResourceBundle bund = null;
-
         String path = "resources.strings/titles";
 
         // Чтение без локали
