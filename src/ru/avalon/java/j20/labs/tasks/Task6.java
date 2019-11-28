@@ -61,7 +61,6 @@ public class Task6 implements Task {
      * @throws IOException в случае ошибки ввода-вывода.
      */
     private Collection<Country> read(File file) throws IOException {
-        LinkedList<Country> countryList = new LinkedList();
         ArrayList<Country> result = null;
 
         try (InputStream stream = new FileInputStream(file);
@@ -79,7 +78,8 @@ public class Task6 implements Task {
                     System.out.println("ошибка парсинга строки \""+ countryRow + "\"");
                 }
             }
-            return new ArrayList<Country>(buffer);
+            result = new ArrayList<>(buffer);
+            return result;
         }
 
     }
