@@ -33,13 +33,23 @@ public class Task5 implements Task {
          */
         // ResourceBundle bundle = ResourceBundle.getBundle("resources.strings/titles");
         ResourceBundle bund = null;
+
         String path = "resources.strings/titles";
+
+        // Чтение без локали
         bund = read(path);
         System.out.println("menu.help= "+ bund.getString("menu.help"));
+
+        // Чтение аглицкой локали
         Locale locale = new Locale("en");
         bund = read(path, locale);
         System.out.println("menu.help in "+locale.getLanguage()+ " = "+ bund.getString("menu.help"));
-    
+
+        // Чтение французской локали. Предполагается, что будет использована локаль по умолчанию
+        locale = new Locale("");
+        bund = read(path, locale);
+        System.out.println("menu.help in "+locale.getLanguage()+ " = "+ bund.getString("menu.help"));
+
     }
 
     /**

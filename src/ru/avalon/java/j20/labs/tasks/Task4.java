@@ -40,14 +40,10 @@ public class Task4 implements Task {
      * @return новый экземпляр типа {@link Properties}
      */
     private Properties read(String path) throws FileNotFoundException, IOException {
-        //System.out.println(System.getProperties().get("java.class.path"));
-      //BufferedReader areader = new BufferedReader(new FileReader(path));
-        //FileReader reader = new FileReader(path);
         InputStream stream = ClassLoader.getSystemResourceAsStream(path);
         Properties result = new Properties();
         result.load(stream);
-        String line = result.getProperty("db.mysql.url");
-        System.out.println(" " + line );
+        System.out.println("Property value with key \"db.mysql.url\" = " + result.getProperty("db.mysql.url"));
         return result;
     }
 }

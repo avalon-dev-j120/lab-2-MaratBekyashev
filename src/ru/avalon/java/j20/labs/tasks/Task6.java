@@ -5,7 +5,16 @@ import ru.avalon.java.j20.labs.models.Country;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+
+import java.io.Reader;
+import java.io.InputStream;
+
 
 /**
  * Задание №6
@@ -48,6 +57,24 @@ public class Task6 implements Task {
      * @throws IOException в случае ошибки ввода-вывода.
      */
     private Collection<Country> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        LinkedList<Country> countryList = new LinkedList();
+        ArrayList<Country> result = null;
+
+        try (InputStream stream = new FileInputStream(file);
+             Reader reader = new InputStreamReader(stream);
+             BufferedReader input = new BufferedReader(reader)) {
+
+            Collection<Country> buffer = new LinkedList<>();
+
+            String line = null;
+            while ((line = input.readLine()) != null) {
+                buffer.add(line);
+            }
+
+            return new ArrayList<Country>(buffer);
+        }
+
+        //result = countryList.toArray();
+        //return result;
     }
 }
