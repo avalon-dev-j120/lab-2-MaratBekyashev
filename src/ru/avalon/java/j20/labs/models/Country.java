@@ -73,7 +73,7 @@ public class Country {
         String isoCode;
         String countryName;
         int colonPos = text.indexOf(":");
-        if (colonPos <= 0)
+        if (colonPos < 0)
             throw new ParseException("Строка неверного формата", 0);
         isoCode = text.substring(0, colonPos);
         countryName = text.substring(colonPos+1);
