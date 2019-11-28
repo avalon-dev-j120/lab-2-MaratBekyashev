@@ -5,6 +5,7 @@ import ru.avalon.java.j20.labs.models.Country;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collection;
@@ -31,6 +32,9 @@ public class Task6 implements Task {
     public void run() throws IOException {
         File input = new File("assets/countries.txt");
         Collection<Country> countries = read(input);
+
+        for (Country cou: countries)
+            System.out.println("ISO: "+cou.getCode()+", NAME: "+ cou.getName());
 
         /*
          * TODO(Студент): Выполнить задание №6
@@ -66,15 +70,17 @@ public class Task6 implements Task {
 
             Collection<Country> buffer = new LinkedList<>();
 
-            String line = null;
-            while ((line = input.readLine()) != null) {
-                buffer.add(line);
+            String countryRow;
+            while ((countryRow = input.readLine()) != null) {
+                try{
+                  buffer.add(Country.valueOf(countryRow));
+                   }
+                catch (ParseException e){
+                    System.out.println("ошибка парсинга строки \""+ countryRow + "\"");
+                }
             }
-
             return new ArrayList<Country>(buffer);
         }
 
-        //result = countryList.toArray();
-        //return result;
     }
 }

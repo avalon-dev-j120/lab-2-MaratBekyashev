@@ -46,7 +46,7 @@ public class Task5 implements Task {
         System.out.println("menu.help in "+locale.getLanguage()+ " = "+ bund.getString("menu.help"));
 
         // Чтение французской локали. Предполагается, что будет использована локаль по умолчанию
-        locale = new Locale("");
+        locale = new Locale("fr");
         bund = read(path, locale);
         System.out.println("menu.help in "+locale.getLanguage()+ " = "+ bund.getString("menu.help"));
 
