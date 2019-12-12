@@ -72,11 +72,11 @@ public class Country {
          */
         String isoCode;
         String countryName;
-        int commaPos = text.indexOf(":");
-        if (commaPos <= 0)
+        int colonPos = text.indexOf(":");
+        if (colonPos < 0)
             throw new ParseException("Строка неверного формата", 0);
-        isoCode = text.substring(0, commaPos);
-        countryName = text.substring(commaPos+1);
+        isoCode = text.substring(0, colonPos);
+        countryName = text.substring(colonPos+1);
 
         return (new Country(isoCode, countryName));
     }
